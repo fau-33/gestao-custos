@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,17 +21,25 @@ public class Despesa {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
+
+  @Column(nullable = false)
   private String descricao;
 
-
+  @Column(nullable = false)
   private LocalDate data;
+  
+  @Column(nullable = false)
   private BigDecimal valor;
+
+  @Column(length = 100, nullable = false)
   private String categoria;
+
+  @Column(nullable = false)
   private String email;
 
-  @CreatedDate
+  @CreationTimestamp
   private LocalDate data_criacao;
-  
+
   public UUID getId() {
     return id;
   }
@@ -86,5 +96,16 @@ public class Despesa {
     this.data_criacao = data_criacao;
   }
 
+  @Override
+  public String toString() {
+    return "Despesa [id=" + id + ", descricao=" + descricao + ", data=" + data + ", valor=" + valor + ", categoria="
+        + categoria + ", email=" + email + ", data_criacao=" + data_criacao + ", getId()=" + getId()
+        + ", getDescricao()=" + getDescricao() + ", getData()=" + getData() + ", getValor()=" + getValor()
+        + ", getCategoria()=" + getCategoria() + ", getEmail()=" + getEmail() + ", getData_criacao()="
+        + getData_criacao() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+        + super.toString() + "]";
+  }
+
+  
   
 }
